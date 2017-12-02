@@ -7,7 +7,7 @@ Created on Fri Nov 17 23:38:08 2017
 """
 import numpy as np
 import matplotlib.pyplot as plt
-
+### commit file change!
 
 """
 W_sun: 1000 W/m 2
