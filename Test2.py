@@ -6,9 +6,13 @@ Created on Fri Nov 17 23:38:08 2017
 @author: solidstates
 """
 <<<<<<< HEAD
+<<<<<<< HEAD
 print ('master)
 =======
 print ("file new...")
+>>>>>>> testing
+=======
+print ("file new testing...")
 >>>>>>> testing
 
 import numpy as np
