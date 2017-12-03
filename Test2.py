@@ -5,7 +5,7 @@ Created on Fri Nov 17 23:38:08 2017
 
 @author: solidstates
 """
-print ("file new...")
+print ("file new testing...")
 
 import numpy as np
 import matplotlib.pyplot as plt
