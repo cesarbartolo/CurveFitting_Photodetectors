@@ -20,6 +20,15 @@ def active_area(radio_pd):
     active_area= np.pi * radio_pd**2
     return (active_area)
 
+def area_unitcell(periodicity, radio_hole):
+    area_unitcell= ((periodicity)**2) - area_hole(radio_hole)
+    return (area_unitcell)
+
+def fill_ratio ( area_allHoles, area_device):
+    fill_ratio=area_allHoles/ area_device
+    return (fill_ratio)
+    
+
 
 
 radio_hole=np.array([ 300,350,500,600,650])*1e-9
