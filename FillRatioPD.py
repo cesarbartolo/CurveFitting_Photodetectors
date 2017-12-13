@@ -9,7 +9,7 @@ their properties
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import csv
 
 
 def area_hole (diameter_hole):
@@ -45,7 +45,7 @@ def fill_ratio_hexagonal( diameter_hole, period,diameter_pd ):
     area_air=numberHoles_inDevice*area_hole
     Effective_Area_Device=area_device - area_air
     fillRatio=area_air/area_device
-    return (numberHoles_inDevice,area_device,Effective_Area_Device,fillRatio)
+    return (diameter_hole*1e9, period*1e9, diameter_pd*1e6,numberHoles_inDevice,area_device,Effective_Area_Device,fillRatio)
     
     
 #diameters=np.arange(400,1400,100)*1e-9
@@ -59,7 +59,46 @@ def fill_ratio_hexagonal( diameter_hole, period,diameter_pd ):
 
 
 #hole_degins = {diameter:period}
-hole_designs={1500:[3000,2500,2200,2000,1800], 1300:[3000.3500,2300,2000,1600], 1150:[2250,2000,1750,1500],1000:[1500,2000,1500,1300]}
+hole_designs=({1500:[3000,2500,2200,2000,1800], 1300:[3500,3000,2300,2000,1600], 1150:[2250,2000,1750,1500],1000:[1500,2000,1500,1300],
+                800:[1800,1300,1050], 700:[1700,1300,1200,1000], 630:[1630,1200,1000,900], 1200:[3000,2200,2000,1800] })
+
+periods=list (hole_designs.values())
+diameters=list(hole_designs.keys())
+
+
+DIAMETER_HOLES=[]
+PERIOD=[]
+DIAMETER_PD=[]
+NUMBER_HOLES=[]
+AREA_DEVICE=[]
+EFFECTIVE_AREA=[]
+FILL_RATIO=[]
+
+
+results  =  [DIAMETER_HOLES, PERIOD,
+DIAMETER_PD, NUMBER_HOLES, AREA_DEVICE,
+EFFECTIVE_AREA, FILL_RATIO]
+
+
+for d in diameters:
+    for p in periods[diameters.index(d)]:
+        diameter_hole, period, diameter_pd,numberHoles_inDevice,area_device,Effective_Area_Device,fillRatio = fill_ratio_hexagonal( d*1e-9, p*1e-9, 100e-6 )
+        DIAMETER_HOLES.append(diameter_hole)
+        PERIOD.append(period)
+        DIAMETER_PD.append(diameter_pd)
+        NUMBER_HOLES.append(numberHoles_inDevice)
+        AREA_DEVICE.append(area_device)
+        EFFECTIVE_AREA.append(Effective_Area_Device)
+        FILL_RATIO.append(fillRatio)
+        
+    
+csvfile= 'C:\\Users\\Cesar Bartolo\\Desktop\\CurveFitting_Photodetectors\\csvfile.csv'
+with open(csvfile, "w") as output:
+    writer = csv.writer(output, lineterminator='\n')
+    writer.writerows(results)
+
+
+
 
 
 """
